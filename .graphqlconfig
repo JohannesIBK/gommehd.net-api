@@ -1,0 +1,13 @@
+{
+  "name": "GommeHD.net API",
+  "schemaPath": "schema.graphql",
+  "extensions": {
+    "endpoints": {
+      "GommeHDnet API": {
+        "url": "https://api.gommehd.net/graphql",
+        "headers": {},
+        "introspect": false
+      }
+    }
+  }
+}

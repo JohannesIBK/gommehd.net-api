@@ -1,0 +1,194 @@
+schema {
+    query: Query
+}
+type MinecraftAccount {
+    name: String
+    uuid: String
+}
+type Data {
+    key: String
+    value: String
+}
+type Response {
+    error: String
+    success: Boolean
+}
+
+# Clan Stuff
+type ClanWarClan {
+    won: Boolean
+    clan: Clan
+}
+type ClanWar {
+    id: ID
+    gamemode: String
+    map: String
+    start: Int
+    end: Int
+}
+type ClanWarsQuery {
+    recentMatches(gamemode: String!, start: Int!, end: Int!): [ClanWarClan]
+    # runningMatches(gamemode: String!)
+}
+type ClanMember {
+    account: MinecraftAccount
+    twitter: String
+    twitch: String
+    youtube: String
+    discord: String
+    rank: String
+}
+type GameModeStats {
+    name: String
+    elo: Int
+    rank: Int
+    wins: Int
+    loses: Int
+}
+type ClanPage {
+    content: String
+    avatar: String
+    twitter: String
+    youtube: String
+    comments: Int
+    homepage: String
+    canEdit: Boolean
+    spacers: [Data]
+}
+type Clan {
+    name: String
+    uuid: String
+    deleted: Boolean
+    tag: String
+    isFollowing: Boolean
+    fans: Int
+    members: [ClanMember]
+    page: ClanPage
+    gamemodes: [GameModeStats]
+}
+type RankingEntry {
+    clan: Clan
+    rank: Int
+}
+type ClanHistoryEntry {
+    action: Int
+    player: MinecraftAccount
+    otherPlayer: MinecraftAccount
+    data: [Data]
+}
+type ClanQuery {
+    clanPage(id: String!): [Clan]
+    clanHistory(uuid: String!): [ClanHistoryEntry]
+    totalCount: Int
+    topClansByFans: [RankingEntry]
+    topClans(gamemode: String, start: Int, end: Int): [RankingEntry]
+}
+
+# Game Stuff
+type GameMap {
+    name: String
+    banner: String
+    id: Int
+    featured: Boolean
+    tag: [String]
+}
+type GameRankingEntry {
+    rank: Int
+    account: MinecraftAccount
+}
+type GlobalStat {
+    key: String
+    value: Int
+    format: String
+    scale: String
+}
+type GameRanking {
+    allTime: [GameRankingEntry]
+    thirtyDays: [GameRankingEntry]
+}
+type Game {
+    name: String
+    preview: String
+    tags: [String]
+    featured: Boolean
+    banner: String
+    maps: [GameMap]
+    globalStats: [GlobalStat]
+    ranking: GameRanking
+}
+type GamesQuery {
+    all: [Game]
+    findByName(name: String): Game
+}
+
+# News Stuff
+type NewsLocale {
+    locale: String
+    title: String
+    shortDesc: String
+    longDesc: String
+    link: String
+    linkType: String
+    image: String
+    imageAlign: String
+    imageFeatured: String
+    imageFeaturedAlign: String
+}
+type News {
+    id: Int
+    date: Int
+    published: Boolean
+    fallbackLanguage: Boolean
+    featured: Boolean
+    languages: [NewsLocale]
+}
+type RecentNewsResponse {
+    hasMore: Boolean
+    recent: News
+    featured: News
+}
+type NewsQuery {
+    recent: RecentNewsResponse
+}
+
+# User Stuff
+type DiscordAccount {
+    id: String
+    name: String
+}
+type User {
+    id: ID
+    email: String
+    discord: String
+    hasTwoFa: Boolean
+    locale: String
+    teamspeak: String
+    minecraft: MinecraftAccount
+}
+
+type UserLoginResponse {
+    success: Boolean
+    requireTwoFa: Boolean
+    needToMigrate: Boolean
+    token: String
+    error: String
+}
+
+type UserMutation {
+    login(email: String!, password: String!, captcha: String!): UserLoginResponse
+    updateTheme(dark: Boolean!): Response
+}
+
+type UserQuery {
+    # findById(id: ID): User
+    findByEmail(email: String!): User
+}
+
+# Basics
+type Query {
+    games: GamesQuery
+    playerCount: Int
+    news: NewsQuery
+    clanwars: ClanWarsQuery
+    clan: ClanQuery
+}
