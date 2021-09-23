@@ -18,6 +18,15 @@ type Response {
 type ClanWarClan {
     won: Boolean
     clan: Clan
+    lineup: [MinecraftAccount]
+}
+type ClanWarLogEntry {
+    key: String
+    value: String
+}
+type PuntivePoints { # Not Confirmed
+    clan: Clan
+    elo: Int
 }
 type ClanWar {
     id: ID
@@ -25,11 +34,21 @@ type ClanWar {
     map: String
     start: Int
     end: Int
+    elo: Int
+    chatlog: String
+    replay: String
+    winnerInverted: Boolean
+    canReport: Boolean
+    punitivePoints: [PuntivePoints] # not confirmed
+    motm: String
+    # bestof
     clans: [ClanWarClan]
+    log: [[ClanWarLogEntry]]
 }
 type ClanWarsQuery {
     recentMatches(gamemode: String!, start: Int!, end: Int!): [ClanWar]
     runningMatches(gamemode: String!): [ClanWar]
+    match(id: ID!): ClanWar
 }
 type ClanMember {
     account: MinecraftAccount
