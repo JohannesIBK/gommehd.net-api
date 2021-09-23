@@ -25,9 +25,10 @@ type ClanWar {
     map: String
     start: Int
     end: Int
+    clans: [ClanWarClan]
 }
 type ClanWarsQuery {
-    recentMatches(gamemode: String!, start: Int!, end: Int!): [ClanWarClan]
+    recentMatches(gamemode: String!, start: Int!, end: Int!): [ClanWar]
     # runningMatches(gamemode: String!)
 }
 type ClanMember {
