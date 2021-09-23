@@ -29,7 +29,7 @@ type ClanWar {
 }
 type ClanWarsQuery {
     recentMatches(gamemode: String!, start: Int!, end: Int!): [ClanWar]
-    # runningMatches(gamemode: String!)
+    runningMatches(gamemode: String!): [ClanWar]
 }
 type ClanMember {
     account: MinecraftAccount
