@@ -74,7 +74,7 @@ type RankingEntry {
 type ClanHistoryEntry {
     action: Int
     player: MinecraftAccount
-    otherPlayer: MinecraftAccount
+    otherPlayers: [MinecraftAccount]
     data: [Data]
 }
 type ClanQuery {
@@ -82,7 +82,7 @@ type ClanQuery {
     clanHistory(uuid: String!): [ClanHistoryEntry]
     totalCount: Int
     topClansByFans: [RankingEntry]
-    topClans(gamemode: String, start: Int, end: Int): [RankingEntry]
+    topClans(gamemode: String!, start: Int!, end: Int!): [RankingEntry]
 }
 
 # Game Stuff
@@ -119,7 +119,7 @@ type Game {
 }
 type GamesQuery {
     all: [Game]
-    findByName(name: String): Game
+    findByName(name: String!): Game
 }
 
 # News Stuff
