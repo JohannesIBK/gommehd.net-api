@@ -1,5 +1,6 @@
 schema {
     query: Query
+    mutation: Mutation
 }
 type MinecraftAccount {
     name: String
@@ -216,4 +217,8 @@ type Query {
     news: NewsQuery
     clanwars: ClanWarsQuery
     clan: ClanQuery
+}
+
+type Mutation {
+    user: UserMutation
 }
