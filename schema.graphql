@@ -169,6 +169,7 @@ type RecentNewsResponse {
 }
 type NewsQuery {
     recent: RecentNewsResponse
+    byId(id: Int!): News
 }
 
 # User Stuff
