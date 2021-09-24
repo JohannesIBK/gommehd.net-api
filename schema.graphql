@@ -40,8 +40,8 @@ type ClanWar {
     winnerInverted: Boolean
     canReport: Boolean
     punitivePoints: [PuntivePoints] # not confirmed
-    # motm:
-    bestof: String
+    motm: String
+    #bestof: String
     clans: [ClanWarClan]
     log: [[ClanWarLogEntry]]
 }
