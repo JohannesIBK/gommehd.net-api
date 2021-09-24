@@ -40,8 +40,8 @@ type ClanWar {
     winnerInverted: Boolean
     canReport: Boolean
     punitivePoints: [PuntivePoints] # not confirmed
-    motm: String
-    # bestof
+    # motm:
+    bestof: String
     clans: [ClanWarClan]
     log: [[ClanWarLogEntry]]
 }
@@ -185,7 +185,6 @@ type User {
     teamspeak: String
     minecraft: MinecraftAccount
 }
-
 type UserLoginResponse {
     success: Boolean
     requireTwoFa: Boolean
@@ -193,19 +192,24 @@ type UserLoginResponse {
     token: String
     error: String
 }
-
+type UserRegisterResponse {
+    error: String
+    success: Boolean
+    response: UserLoginResponse
+}
 type UserMutation {
     login(email: String!, password: String!, captcha: String!): UserLoginResponse
     updateTheme(dark: Boolean!): Response
+    register(email: String!, password: String!, captcha: String!, locale: String): UserRegisterResponse
 }
-
 type UserQuery {
-    # findById(id: ID): User
+    findById(id: ID): User
     findByEmail(email: String!): User
 }
 
 # Basics
 type Query {
+    user: UserQuery
     games: GamesQuery
     playerCount: Int
     news: NewsQuery
