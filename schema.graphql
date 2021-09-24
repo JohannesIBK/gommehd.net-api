@@ -168,7 +168,7 @@ type RecentNewsResponse {
     featured: News
 }
 type NewsQuery {
-    recent: RecentNewsResponse
+    recent(count: Int, locale: String, unpublished: Boolean, start: Int): RecentNewsResponse
     byId(id: Int!): News
 }
 
