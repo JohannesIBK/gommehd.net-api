@@ -168,6 +168,15 @@ type RecentNewsResponse {
     recent: News
     featured: News
 }
+input ClanPageData {
+    twitter: String
+    homepage: String
+    youtube: String
+    content: String
+}
+type ClanMutation {
+    updateClanPage(clan: ID!, data: ClanPageData): Response
+}
 type NewsQuery {
     recent(count: Int, locale: String, unpublished: Boolean, start: Int): RecentNewsResponse
     byId(id: Int!): News
@@ -221,4 +230,5 @@ type Query {
 
 type Mutation {
     user: UserMutation
+    clan: ClanMutation
 }
