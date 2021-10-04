@@ -97,12 +97,19 @@ type ClanHistoryEntry {
     otherPlayers: [MinecraftAccount]
     data: [Data]
 }
+input SearchFilter {
+    gamemode: String
+    stat: String
+    min: Int
+    max: Int
+}
 type ClanQuery {
-    clanPage(id: String!): [Clan]
+    clanPage(id: String!): Clan
     clanHistory(uuid: String!): [ClanHistoryEntry]
     totalCount: Int
     topClansByFans: [RankingEntry]
     topClans(gamemode: String!, start: Int!, end: Int!): [RankingEntry]
+    search(search: String!, tag: Boolean, filters: [SearchFilter]): [Clan]
 }
 
 # Game Stuff
